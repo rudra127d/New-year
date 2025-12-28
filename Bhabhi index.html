@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year Bhabhi!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffd1ff);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Moving Background Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Card */
+        .card {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 40px;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            z-index: 10;
+            transform: scale(0);
+            animation: popUp 1.5s ease forwards;
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #d6336c;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #444;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .message {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            background: #ff758c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.6);
+            background: #ff5e78;
+        }
+
+        /* Floating Elements (Hearts/Stars) */
+        .shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            bottom: -50px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float Up 10s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { bottom: -50px; transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { bottom: 100%; transform: translateX(-50px); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="shapes" id="shapes"></div>
+
+    <div class="card">
+        <h1>Happy New Year!</h1>
+        <h2>In Advance (2026) ✨</h2>
+        
+        <p class="message">
+            Pyari Bhabhi, <br><br>
+            Naya saal aane wala hai, par aapki mithas hamesha purani wali hi rahe!<br>
+            Bhagwan kare ye saal aapke chehre par wahi beautiful smile rakhe jo  sabko pasand hai.
+            <br><br>
+            <b>Stay Happy & Blessed!</b>
+        </p>
+
+        <button class="btn" onclick="celebrate()">Click for Surprise 🎉</button>
+    </div>
+
+    <script>
+        // Javascript to add floating hearts dynamically
+        const shapesContainer = document.getElementById('shapes');
+        
+        function createShapes() {
+            const shape = document.createElement('div');
+            shape.classList.add('shape');
+            
+            // Random styling
+            const size = Math.random() * 40 + 10;
+            shape.style.width = `${size}px`;
+            shape.style.height = `${size}px`;
+            shape.style.left = `${Math.random() * 100}%`;
+            shape.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            
+            // Random colors (Hearts/Circles)
+            const colors = ['#ff9a9e', '#fff', '#fad0c4', '#ffdde1'];
+            shape.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Add heart shape clip-path sometimes
+            if(Math.random() > 0.5) {
+                shape.style.clipPath = "path('M10,30 A20,20,0,0,1,50,30 A20,20,0,0,1,90,30 Q90,60,50,90 Q10,60,10,30 Z')";
+            }
+
+            shapesContainer.appendChild(shape);
+
+            // Remove after animation
+            setTimeout(() => {
+                shape.remove();
+            }, 10000);
+        }
+
+        // Create shapes continuously
+        setInterval(createShapes, 300);
+
+        // Button interaction
+        function celebrate() {
+            alert("Happy New Year Bhabhi Ji! 🍫🍫 Party baaki rahi!");
+            // Confetti burst logic can be added here, but keeping it simple for now!
+            document.querySelector('.btn').innerText = "Wishes Sent! ❤️";
+            document.querySelector('.btn').style.background = "#4CAF50";
+        }
+    </script>
+</body>
+</html>
